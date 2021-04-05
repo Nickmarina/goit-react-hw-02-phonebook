@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ContactForm from './components/ContactForm';
 import ContactList from './components/ContactList';
-// import Filter from './components/Filter';
+import Filter from './components/Filter';
 
 const App = () => {
   const [contacts, setContacts] = useState([
@@ -18,7 +18,13 @@ const App = () => {
       : setContacts(prevState => [...prevState, newContact]);
   };
 
-  const handleDelete = id => {
+  const handleFilter = e => setFilter(e.target.value);
+  const normalizedContact = filter.toLowerCase();
+  const contactsForList = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(normalizedContact),
+  );
+
+  const hadleDeleteContact = id => {
     setContacts(prevState => prevState.filter(contact => contact.id !== id));
   };
 
@@ -27,8 +33,11 @@ const App = () => {
       <h1>Phonebook</h1>
       <ContactForm onChangeContacts={handleChangeContacts} />
       <h2>Contacts</h2>
-      {/* <Filter ... /> */}
-      <ContactList contacts={contacts} onDelete={handleDelete} />
+      <Filter onFilter={handleFilter} filter={filter} />
+      <ContactList
+        contacts={contactsForList}
+        onDeleteContact={hadleDeleteContact}
+      />
     </div>
   );
 };
