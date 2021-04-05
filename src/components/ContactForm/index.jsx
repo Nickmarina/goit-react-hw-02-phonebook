@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import shortid from 'shortid';
+import useStyles from './styles';
+
 const ContactForm = ({ onChangeContacts }) => {
+  const classes = useStyles();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -20,10 +23,11 @@ const ContactForm = ({ onChangeContacts }) => {
   const handleChangeNumber = e => setNumber(e.target.value);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={classes.form} onSubmit={handleSubmit}>
       <label>
-        <h3>Name</h3>
+        <h3 className={classes.title}>Name</h3>
         <input
+          className={classes.input}
           type="text"
           name="name"
           value={name}
@@ -34,8 +38,9 @@ const ContactForm = ({ onChangeContacts }) => {
         />
       </label>
       <label>
-        <h3>Number</h3>
+        <h3 className={classes.title}>Number</h3>
         <input
+          className={classes.input}
           type="tel"
           name="number"
           value={number}
@@ -45,7 +50,9 @@ const ContactForm = ({ onChangeContacts }) => {
           onChange={handleChangeNumber}
         />
       </label>
-      <button type="submit">Add contact</button>
+      <button className={classes.btn} type="submit">
+        Add contact
+      </button>
     </form>
   );
 };

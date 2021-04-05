@@ -1,11 +1,18 @@
 import PropTypes from 'prop-types';
+import useStyles from './styles';
+
 const ContactList = ({ contacts, onDeleteContact }) => {
+  const classes = useStyles();
   return (
-    <ul>
+    <ul className={classes.list}>
       {contacts.map(({ id, name, number }) => (
-        <li key={id}>
-          {name}: {number}
-          <button type="button" onClick={() => onDeleteContact(id)}>
+        <li className={classes.item} key={id}>
+          {name}: <span className={classes.span}>{number}</span>
+          <button
+            className={classes.btn}
+            type="button"
+            onClick={() => onDeleteContact(id)}
+          >
             Delete
           </button>
         </li>

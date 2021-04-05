@@ -1,9 +1,17 @@
 import { useState } from 'react';
+import { createUseStyles } from 'react-jss';
 import ContactForm from './components/ContactForm';
 import ContactList from './components/ContactList';
 import Filter from './components/Filter';
 
+const useStyles = createUseStyles({
+  container: {
+    marginLeft: 30,
+  },
+});
+
 const App = () => {
+  const classes = useStyles();
   const [contacts, setContacts] = useState([
     { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
     { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
@@ -29,7 +37,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className={classes.container}>
       <h1>Phonebook</h1>
       <ContactForm onChangeContacts={handleChangeContacts} />
       <h2>Contacts</h2>
